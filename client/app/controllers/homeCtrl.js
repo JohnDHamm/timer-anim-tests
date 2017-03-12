@@ -3,45 +3,66 @@
 app.controller("homeCtrl", function($scope, $location){
 
 	$scope.testArray = [
-		{ 'index': 0,
+		{ 'id': 0,
 			'name': 'zero'},
-		{ 'index': 1,
+		{ 'id': 1,
 			'name': 'one'},
-		{ 'index': 2,
+		{ 'id': 2,
 			'name': 'two'},
-		{ 'index': 3,
-			'name': 'three'}
+		{ 'id': 3,
+			'name': 'three'},
+		{ 'id': 4,
+			'name': 'four'},
+		{ 'id': 5,
+			'name': 'five'}
 	]
 
-	let currentAthleteOrder = [ 0, 1, 2, 3 ],
-			athleteBtnHeight = 60,
+	let currentAthleteOrder = [ 0, 1, 2, 3, 4, 5 ],
+			athleteBtnHeight = 55,
 			numAthletes = $scope.testArray.length;
 
-
-	console.log("$scope.testArray", $scope.testArray);
-	console.log("numAthletes", numAthletes);
-
-	$scope.recordLap = (index) => {
-		console.log("btn index", index);
-		TweenLite.to(`#athleteBtn${index}`, .25, {
-			top: "+=60px",
-			backgroundColor:"#ff0000",
-			ease:Power2.easeInOut
-		});
-
-		updateOrder(index);
+	$scope.recordLap = (id) => {
+		//record time + update lastLap
+		//animate buttons
+		animateButtons(id);
 	}
 
-	const updateOrder = (index) => {
-		let orderIndex = findAthInCurrentOrder(index);
-		console.log("orderIndex", orderIndex);
-		currentAthleteOrder.splice(orderIndex, 1);
-		currentAthleteOrder.push(index);
+	const animateButtons = (id) => {
+		let currentOrderIndex = currentAthleteOrder.indexOf(id);
+		let distanceToBottom = (numAthletes - currentOrderIndex - 1) * athleteBtnHeight;
+		let btnsToAnimateUp = makeNextButtonsArray(currentOrderIndex);
+
+		TweenLite.to(`#athleteBtn${id}`, .25, {
+			top: `+=${distanceToBottom}px`,
+			opacity: 0.4,
+			ease: Power2.easeInOut,
+			onComplete: function() {
+				TweenLite.to(`#athleteBtn${id}`, .1, {
+					opacity: 1,
+					ease:Power2.easeInOut
+					})
+				}
+		});
+		TweenLite.to(btnsToAnimateUp, .25, {
+			top: `-=${athleteBtnHeight}`,
+			ease:Power2.easeInOut
+		});
+		updateOrder(id, currentOrderIndex);
+	}
+
+	const updateOrder = (id, currentOrderIndex) => {
+		currentAthleteOrder.splice(currentOrderIndex, 1);
+		currentAthleteOrder.push(id);
 		console.log("currentAthleteOrder", currentAthleteOrder);
 	}
 
-	const findAthInCurrentOrder = (index) => {
-		return currentAthleteOrder.indexOf(index);
+	const makeNextButtonsArray = (currentOrderIndex) => {
+		let nextArray = [];
+		for (let i = currentOrderIndex + 1 ; i < currentAthleteOrder.length; i++) {
+			let nextString = `#athleteBtn${currentAthleteOrder[i]}`;
+			nextArray.push(nextString);
+		}
+		return nextArray;
 	}
 
 
