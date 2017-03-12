@@ -1,7 +1,7 @@
 <div id="testDiv">
 
-	<div ng-repeat="athlete in testArray" layout="row" flex="90" flex-offset="5">
-		<div class="athleteBtn" layout="row" flex ng-click="recordLap(athlete.index)">
+	<div id="athleteBtn{{athlete.index}}" class="athleteBtn" ng-repeat="athlete in testArray" layout="row" flex="90" flex-offset="5" ng-click="recordLap(athlete.index)">
+		<!-- <div  class="athleteBtn" layout="row" flex ng-click="recordLap(athlete.index)"> -->
 <!-- 			<div flex="20" class="currentLapNumDiv">
 					<h1>{{athlete.lap}}</h1>
 			</div> -->
@@ -16,7 +16,7 @@
 					<span class="lastLapTime">last lap: {{athlete.lastLapTime}}.</span><span class="lastLapTimeMs">{{athlete.lastLapTimeMs}}</span>
 				</div>
 			</div> -->
-		</div>
+		<!-- </div> -->
 	</div>
 
 </div>

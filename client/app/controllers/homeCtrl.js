@@ -23,6 +23,11 @@ app.controller("homeCtrl", function($scope, $location){
 
 	$scope.recordLap = (index) => {
 		console.log("btn index", index);
+		TweenLite.to(`#athleteBtn${index}`, .25, {
+			top: "+=60px",
+			backgroundColor:"#ff0000",
+			ease:Power2.easeInOut
+		});
 
 		updateOrder(index);
 	}

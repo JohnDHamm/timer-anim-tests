@@ -1,0 +1,19 @@
+{
+  "name": "timer-anim-tests",
+  "version": "1.0.0",
+  "description": "animation testing for team timer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnDHamm/timer-anim-tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnDHamm/timer-anim-tests/issues"
+  },
+  "homepage": "https://github.com/JohnDHamm/timer-anim-tests#readme"
+}
